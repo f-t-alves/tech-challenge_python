@@ -9,15 +9,14 @@ class clientAccount:
         self.__clientLastName = 'Doe'
         self.wallets = {}
 
-        self.addWallet(currencyList['usd'])
-        self.addWallet(currencyList['brl'])
+        #self.addWallet(currencyList['usd'])
+        #self.addWallet(currencyList['brl'])
 
         #self.wallets['USD'] = currencyWallet('dollar','USD')
         #self.wallets['BRL'] = currencyWallet('real','BRL')
 
-    def addWallet(self,symbol):
-        try:
-            self.wallets[symbol] = currencyWallet(symbol)
+    def addWallet(self,currencyProps):
+            self.wallets[currencyProps['symbol']] = currencyWallet(currencyProps)
 
     def move(self,amount,currency):
         try:
