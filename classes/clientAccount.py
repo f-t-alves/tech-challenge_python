@@ -1,4 +1,4 @@
-from currencyWallet import *
+from classes.currencyWallet import *
 
 class clientAccount:
 

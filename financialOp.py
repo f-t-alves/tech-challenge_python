@@ -1,7 +1,8 @@
 from classes.iso4217 import currencyList
-import classes.clientAccount
+from classes.clientAccount import *
+import random
 
 accounts = []
-accounts.append(clientAccount())
+accounts.append(clientAccount(random.randrange(0,1000)))
 
 accounts[0].addWallet(currencyList['usd'])
