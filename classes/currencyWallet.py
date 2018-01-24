@@ -1,9 +1,9 @@
 class currencyWallet:
-    def __init__(self,name,symbol):
-        self.__currencyBalance = 0
-        self.__currencyDecimals = 0
-        self.__currencyName = name
-        self.__currencySymbol = symbol.upper()
+    def __init__(self,currencyProperties):
+        self.currencyBalance = 0
+        self.__currencyDecimals = currencyProperties['decimals']
+        self.__currencyName = currencyProperties['name']
+        self.__currencySymbol = currencyProperties['symbol']
 
     @property
     def currencyBalance(self):
@@ -47,6 +47,7 @@ class currencyWallet:
             print('Error: symbol must be string')
         else:
             self.__currencySymbol = value
+
 
     def moveBalance(self,value):
         tryValue = self.currencyBalance + value
