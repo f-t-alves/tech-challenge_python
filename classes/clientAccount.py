@@ -1,5 +1,6 @@
+from classes.currencyWallet import *
+
 class clientAccount:
-    import currencyWallet
 
     def __init__(self,accountNumber):
         self.__accountNumber = accountNumber
@@ -7,8 +8,15 @@ class clientAccount:
         self.__clientMiddleName = None
         self.__clientLastName = 'Doe'
         self.wallets = {}
-        self.wallets['USD'] = currencyWallet('dollar','USD')
-        self.wallets['BRL'] = currencyWallet('real','BRL')
+
+        #self.addWallet(currencyList['usd'])
+        #self.addWallet(currencyList['brl'])
+
+        #self.wallets['USD'] = currencyWallet('dollar','USD')
+        #self.wallets['BRL'] = currencyWallet('real','BRL')
+
+    def addWallet(self,currencyProps):
+            self.wallets[currencyProps['symbol']] = currencyWallet(currencyProps)
 
     def move(self,amount,currency):
         try:
