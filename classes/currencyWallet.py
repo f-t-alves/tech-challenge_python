@@ -1,9 +1,10 @@
 class currencyWallet:
     def __init__(self,currencyProperties):
         self.currencyBalance = 0
-        self.__currencyDecimals = currencyProperties['decimals']
-        self.__currencyName = currencyProperties['name']
         self.__currencySymbol = currencyProperties['symbol']
+        self.__currencyName = currencyProperties['name']
+        self.__currencyDecimals = currencyProperties['decimals']
+        self.__currencyISOCode = currencyProperties['numcode']
 
     @property
     def currencyBalance(self):
@@ -47,6 +48,16 @@ class currencyWallet:
             print('Error: symbol must be string')
         else:
             self.__currencySymbol = value
+
+    @property
+    def currencyISOCode(self):
+        return self.__currencyISOCode
+    @currencyISOCode.setter
+    def currencyISOCode(self,value):
+        if type(value) != type(10):
+            print('Error: ISO code must be integer')
+        else:
+            self.__currencyISOCode = value
 
 
     def moveBalance(self,value):
