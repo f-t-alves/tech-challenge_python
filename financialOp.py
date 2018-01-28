@@ -1,4 +1,4 @@
-from classes.iso4217 import currencyList
+from data.iso4217 import currencyList
 from classes.clientAccount import clientAccount
 import random
 
