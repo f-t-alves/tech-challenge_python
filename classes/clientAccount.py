@@ -1,4 +1,6 @@
 from classes.currencyWallet import *
+from classes.utilities import countDecimals
+from classes.utilities import insertDecimals
 
 class clientAccount:
 
@@ -9,14 +11,9 @@ class clientAccount:
         self.__clientLastName = 'Doe'
         self.wallets = {}
 
-        #self.addWallet(currencyList['usd'])
-        #self.addWallet(currencyList['brl'])
-
-        #self.wallets['USD'] = currencyWallet('dollar','USD')
-        #self.wallets['BRL'] = currencyWallet('real','BRL')
-
     def addWallet(self,currencyProps):
             self.wallets[currencyProps['symbol']] = currencyWallet(currencyProps)
+            return False
 
     def move(self,amount,currency):
         try:
@@ -24,20 +21,27 @@ class clientAccount:
         except:
             print('currency type must be a string')
             return 'currency type must be a string'
-        if type(amount) != type(10):
-            print('amount must be integer')
-            return 'amount must be integer'
+        try:
+            amount = float(amount)
+        except:
+            print('amount must be a number')
+            return 'amount must be a number'
         else:
-            if currency == 'USD':
-                return self.wallets[currency].moveBalance(amount)
-            if currency == 'BRL':
-                return self.wallets[currency].moveBalance(amount)
-        print('currency not supported')
-        return 'currency not supported'
+            try:
+                countedDecimals = countDecimals(amount)
+                expectedDecimals = self.wallets[currency].currencyDecimals
+                if countedDecimals > expectedDecimals:
+                    return 'amount has too many decimal places'
+                integerAmount = int(amount*10**expectedDecimals)
+                return self.wallets[currency].moveBalance(integerAmount)
+            except:
+                return countDecimals(amount)
+        print('account does have a wallet in this currency')
+        return 'account does have a wallet in this currency'
 
     def status(self):
         balances = {}
         print('Balances:')
         for key in self.wallets:
-            balances[key] = self.wallets[key].currencyBalance
+            balances[key] = insertDecimals(self.wallets[key].currencyBalance,self.wallets[key].currencyDecimals)
         return balances

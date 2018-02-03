@@ -8,6 +8,7 @@ class currencyWallet:
 
     @property
     def currencyBalance(self):
+        #In-code balances are of the smallest decimal unit of the currency according to ISO4217
         return self.__currencyBalance
     @currencyBalance.setter
     def currencyBalance(self,value):
@@ -61,10 +62,13 @@ class currencyWallet:
 
 
     def moveBalance(self,value):
+        if type(value) != type(10):
+            print('Error: Amount must be integer')
+            return 'Error: Amount must be integer'
         tryValue = self.currencyBalance + value
         if tryValue < 0:
-            print('Withdrawal exceeds balance')
-            return 'Withdrawal exceeds balance'
+            print('Error: Withdrawal exceeds balance')
+            return 'Error: Withdrawal exceeds balance'
         else:
             self.currencyBalance = tryValue
             return False
